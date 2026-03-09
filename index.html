@@ -8,107 +8,67 @@
 
 <title>Andrea & Jurdan</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
 <style>
+
+html{
+scroll-behavior:smooth;
+}
 
 body{
 margin:0;
 background:black;
 font-family:sans-serif;
-overflow:hidden;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-/* contenedor móvil */
-
-.mobile-frame{
-width:100vw;
-height:100vh;
-max-width:500px;
-position:relative;
-perspective:2000px;
-}
-
-/* páginas */
-
-.page{
-position:absolute;
-width:100%;
-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:black;
-transform-origin:left;
-transition:transform 1.2s ease;
-}
-
-/* imágenes verticales */
-
-.page img{
-height:100%;
-width:auto;
-max-width:100%;
-object-fit:contain;
-}
-
-/* giro */
-
-.mobile-frame.open .front{
-transform:rotateY(-180deg);
-}
-
-/* texto escribir */
-
-.intro{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-font-family:'Great Vibes',cursive;
-font-size:55px;
+overflow-x:hidden;
 color:white;
-white-space:nowrap;
-overflow:hidden;
-border-right:3px solid white;
-width:0;
-animation:typing 2.5s steps(20,end) forwards, blink .7s infinite;
-z-index:10;
 }
 
-@keyframes typing{
-from{width:0}
-to{width:260px}
+/* secciones */
+
+.section{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
 }
 
-@keyframes blink{
-0%,100%{border-color:transparent}
-50%{border-color:white}
+/* imágenes */
+
+.section img{
+max-width:95vw;
+max-height:95vh;
+object-fit:contain;
+border-radius:10px;
+box-shadow:0 15px 40px rgba(0,0,0,0.6);
 }
 
-.hide{
-animation:fadeOut 1s forwards;
-animation-delay:3s;
+/* animación apertura */
+
+.fade-start{
+animation:fadeIn 1s ease forwards;
+opacity:0;
 }
 
-@keyframes fadeOut{
-to{opacity:0}
+@keyframes fadeIn{
+0%{
+opacity:0;
+filter:brightness(0);
+}
+100%{
+opacity:1;
+filter:brightness(1);
+}
 }
 
-/* botón tocar */
+/* indicador scroll */
 
-.tap{
+.scroll-indicator{
 position:absolute;
-bottom:60px;
+bottom:30px;
 left:50%;
 transform:translateX(-50%);
-color:white;
-font-size:16px;
-opacity:.9;
+font-size:14px;
+opacity:0.8;
 animation:bounce 2s infinite;
 }
 
@@ -117,37 +77,99 @@ animation:bounce 2s infinite;
 50%{transform:translate(-50%,10px)}
 }
 
+/* flores flotando */
+
+.flower{
+position:fixed;
+top:-50px;
+font-size:20px;
+animation:fall linear infinite;
+opacity:0.6;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-50px);
+}
+100%{
+transform:translateY(110vh);
+}
+}
+
+/* brillo anillos */
+
+.rings{
+position:absolute;
+animation:sparkle 3s infinite;
+}
+
+@keyframes sparkle{
+0%,100%{filter:brightness(1)}
+50%{filter:brightness(1.4)}
+}
+
+/* botón mapa */
+
+.map-button{
+position:absolute;
+bottom:60px;
+right:20px;
+background:white;
+color:black;
+padding:10px 14px;
+border-radius:20px;
+font-size:14px;
+text-decoration:none;
+box-shadow:0 4px 15px rgba(0,0,0,0.4);
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="mobile-frame" id="book">
+<!-- flores -->
 
-<div class="intro hide">Nos casamos</div>
+<div class="flower" style="left:10%;animation-duration:12s;">🌸</div>
+<div class="flower" style="left:25%;animation-duration:15s;">🌼</div>
+<div class="flower" style="left:40%;animation-duration:13s;">🌸</div>
+<div class="flower" style="left:60%;animation-duration:18s;">🌼</div>
+<div class="flower" style="left:80%;animation-duration:14s;">🌸</div>
 
-<div class="page front">
+<!-- música -->
+
+<audio autoplay loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<!-- portada -->
+
+<section class="section fade-start">
+
 <img src="boda1.png">
-<div class="tap">Toca para abrir</div>
+
+<div class="scroll-indicator">
+Desliza ↓
 </div>
 
-<div class="page back">
+</section>
+
+<!-- orden del día -->
+
+<section class="section">
+
 <img src="boda2.png">
-</div>
 
-</div>
+<a class="map-button" 
+href="https://maps.google.com/?q=Boroa+Jatetxea" 
+target="_blank">
+📍 Ver ubicación
+</a>
 
-<script>
-
-setTimeout(()=>{
-document.body.addEventListener("click",()=>{
-document.getElementById("book").classList.toggle("open");
-});
-},3500);
-
-</script>
+</section>
 
 </body>
 </html>
 ```
+
